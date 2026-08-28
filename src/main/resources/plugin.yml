@@ -1,0 +1,60 @@
+name: NexusEconomy
+version: ${project.version}
+main: com.nexusuniverse.economy.NexusEconomyPlugin
+api-version: '1.21'
+author: Nexus Universe
+description: Bank (Vault-compatible economy provider), physical cash withdrawal in real denominations, a category-based shop GUI (covering every obtainable vanilla block and item, plus dedicated Spawn Eggs and permanent Hearts/Hunger/Oxygen upgrade tabs) with custom-items and enchantments tabs -- including a dedicated NexusEnchants tab (when that plugin is installed) with wildly different, custom pricing per enchant -- plus quantity-select buy/sell and quick /sell commands, a bounty order board, a dual server/player auction house, a credit account with interest/minimum payments/credit score/a physical card that opens its own buy-only shop menu charging straight to the credit line, and a stock market with real price movement and market-wide crash/boom events.
+softdepend: [Vault, NexusSeasons, NexusEnchants]
+
+commands:
+  bank:
+    description: Check your balance, pay other players, or manage cash.
+    usage: /bank <balance|pay <player> <amount>|withdraw <amount>|deposit>
+  shop:
+    description: Open the item shop.
+    usage: /shop
+  sell:
+    description: Quickly sell what's in your hand, or everything sellable in your inventory.
+    usage: /sell <hand|all>
+  economyadmin:
+    description: Admin balance management, plus an override for the Hearts/Hunger/Oxygen upgrade tabs.
+    aliases: [ecoadmin]
+    usage: /economyadmin <set|add|remove> <player> <amount>, or /economyadmin vitals <player> <hearts|hunger|oxygen> <level>
+    permission: nexuseconomy.admin
+  orders:
+    description: Post bounty orders for items, or fulfill someone else's.
+    usage: /orders <list|create <material> <qty> <pay-per-item>|fulfill <id>|cancel <id>>
+  auction:
+    description: The auction house -- browse, list your own items, bid, and claim winnings.
+    aliases: [ah]
+    usage: /auction <list|sell <price> <minutes>|bid <id> <amount>|claim>
+  credit:
+    description: Your credit account -- check your statement, take a cash advance, make a payment, pay a NexusBudget bill directly, or get a physical card.
+    usage: /credit <status|charge <amount>|pay <amount>|payoff|paybill <billId> [amount]|give [player]>
+  stocks:
+    description: The stock market -- prices move on their own, buy/sell against your bank balance.
+    usage: /stocks <list|price <symbol>|buy <symbol> <shares>|sell <symbol> <shares>|portfolio>
+  tpa:
+    description: Request to teleport to another player -- they have to accept it, and it costs you money. Instant and free for admins (nexuseconomy.tpa.bypass).
+    aliases: [tp, tpask]
+    usage: /tpa <player>
+  tpaccept:
+    description: Accept the teleport request currently pending against you.
+    aliases: [tpyes]
+    usage: /tpaccept
+  tpdeny:
+    description: Deny the teleport request currently pending against you.
+    aliases: [tpno]
+    usage: /tpdeny
+  tpacancel:
+    description: Cancel the teleport request you sent.
+    aliases: [tpcancel]
+    usage: /tpacancel
+
+permissions:
+  nexuseconomy.admin:
+    description: Manage player balances directly.
+    default: op
+  nexuseconomy.tpa.bypass:
+    description: Teleport to any player instantly with /tpa -- no request/accept needed, and free unless teleport.bypass.charge-enabled is turned on.
+    default: op
